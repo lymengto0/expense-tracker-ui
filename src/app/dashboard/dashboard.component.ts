@@ -3,19 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../core/auth.service';
 import { API_URL } from '../core/config';
 import { Category } from '../core/models';
+import { HeaderComponent } from '../core/header.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
+  imports : [HeaderComponent],
   template: `
     <div class="page">
-      <header>
-        <h2>Dashboard</h2>
-        <div>
-          <span>{{ auth.email() }}</span>
-          <button (click)="auth.logout()">Log out</button>
-        </div>
-      </header>
+       <app-header />
 
       <h3>Your categories ({{ categories().length }})</h3>
       <ul>
@@ -33,14 +29,6 @@ import { Category } from '../core/models';
         max-width: 700px;
         margin: 40px auto;
         padding: 0 16px;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      header span {
-        margin-right: 12px;
       }
     `,
   ],
