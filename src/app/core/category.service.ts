@@ -6,8 +6,21 @@ import { Category } from './models';
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
   private http = inject(HttpClient);
+  private url = `${API_URL}/categories`;
 
   list() {
-    return this.http.get<Category[]>(`${API_URL}/categories`);
+    return this.http.get<Category[]>(this.url);
+  }
+
+  create(name: string) {
+    return this.http.post<Category>(this.url, { name });
+  }
+
+  rename(id: number, name: string) {
+    return this.http.put<void>(`${this.url}/${id}`, { name });
+  }
+
+  remove(id: number) {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

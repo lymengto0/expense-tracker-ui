@@ -25,15 +25,13 @@ import { TransactionFormComponent } from './transaction-form.component';
           [transaction]="editing()"
           [categories]="categories()"
           (saved)="onSaved()"
-          (cancelled)="closeForm()"
-        />
+          (cancelled)="closeForm()" />
       }
 
       <form class="filters" [formGroup]="filters" (ngSubmit)="applyFilters()">
         <label>From <input type="date" formControlName="fromDate" /></label>
         <label>To <input type="date" formControlName="toDate" /></label>
-        <label
-          >Category
+        <label>Category
           <select formControlName="categoryId">
             <option value="">All</option>
             @for (c of categories(); track c.id) {
@@ -41,8 +39,7 @@ import { TransactionFormComponent } from './transaction-form.component';
             }
           </select>
         </label>
-        <label
-          >Type
+        <label>Type
           <select formControlName="type">
             <option value="">All</option>
             <option value="Income">Income</option>
@@ -53,18 +50,13 @@ import { TransactionFormComponent } from './transaction-form.component';
         <button type="button" (click)="resetFilters()">Reset</button>
       </form>
 
-      @if (error()) {
-        <p class="error">{{ error() }}</p>
-      }
+      @if (error()) { <p class="error">{{ error() }}</p> }
 
       <table>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Note</th>
-            <th class="num">Amount</th>
-            <th></th>
+            <th>Date</th><th>Category</th><th>Note</th>
+            <th class="num">Amount</th><th></th>
           </tr>
         </thead>
         <tbody>
@@ -73,11 +65,7 @@ import { TransactionFormComponent } from './transaction-form.component';
               <td>{{ t.date | date: 'mediumDate' }}</td>
               <td>{{ t.categoryName }}</td>
               <td>{{ t.note }}</td>
-              <td
-                class="num"
-                [class.income]="t.type === 'Income'"
-                [class.expense]="t.type === 'Expense'"
-              >
+              <td class="num" [class.income]="t.type === 'Income'" [class.expense]="t.type === 'Expense'">
                 {{ t.type === 'Income' ? '+' : '-' }}{{ t.amount | number: '1.2-2' }}
               </td>
               <td class="actions">
@@ -86,11 +74,9 @@ import { TransactionFormComponent } from './transaction-form.component';
               </td>
             </tr>
           } @empty {
-            <tr>
-              <td colspan="5" class="empty">
-                {{ loading() ? 'Loading...' : 'No transactions found.' }}
-              </td>
-            </tr>
+            <tr><td colspan="5" class="empty">
+              {{ loading() ? 'Loading...' : 'No transactions found.' }}
+            </td></tr>
           }
         </tbody>
       </table>
@@ -102,77 +88,22 @@ import { TransactionFormComponent } from './transaction-form.component';
       </div>
     </div>
   `,
-  styles: [
-    `
-      .page {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 0 16px;
-      }
-      .top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        align-items: flex-end;
-        margin: 16px 0;
-      }
-      .filters label {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-      }
-      input,
-      select,
-      button {
-        padding: 7px;
-        font-size: 14px;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        text-align: left;
-        padding: 10px 8px;
-        border-bottom: 1px solid #eee;
-      }
-      .num {
-        text-align: right;
-      }
-      .income {
-        color: #1e8e3e;
-      }
-      .expense {
-        color: #c0392b;
-      }
-      .actions {
-        display: flex;
-        gap: 6px;
-        justify-content: flex-end;
-      }
-      .empty {
-        text-align: center;
-        color: #777;
-      }
-      .paging {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        margin-top: 16px;
-      }
-      .error {
-        color: #c0392b;
-      }
-    `,
-  ],
+  styles: [`
+    .page { max-width: 900px; margin: 30px auto; padding: 0 16px; }
+    .top { display: flex; justify-content: space-between; align-items: center; }
+    .filters { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin: 16px 0; }
+    .filters label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+    input, select, button { padding: 7px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eee; }
+    .num { text-align: right; }
+    .income { color: #1e8e3e; }
+    .expense { color: #c0392b; }
+    .actions { display: flex; gap: 6px; justify-content: flex-end; }
+    .empty { text-align: center; color: #777; }
+    .paging { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; }
+    .error { color: #c0392b; }
+  `],
 })
 export class TransactionsComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -272,7 +203,6 @@ export class TransactionsComponent implements OnInit {
     if (!confirm(`Delete "${t.note || t.categoryName}" (${t.amount})?`)) return;
     this.api.remove(t.id).subscribe({
       next: () => {
-        // If we deleted the last item on this page, go back one page
         if (this.items().length === 1 && this.page() > 1) this.page.update((p) => p - 1);
         this.load();
       },
