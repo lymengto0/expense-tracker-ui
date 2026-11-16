@@ -8,7 +8,7 @@ import { AuthService } from '../core/auth.service';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   template: `
-    <div class="box">
+    <div class="auth-card">
       <h2>Create account</h2>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <input type="email" placeholder="Email" formControlName="email" />
