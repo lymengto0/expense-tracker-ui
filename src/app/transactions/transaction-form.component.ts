@@ -4,7 +4,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category, Transaction, TransactionInput, TransactionType } from '../core/models';
 import { TransactionService } from '../core/transaction.service';
 
-
 @Component({
   selector: 'app-transaction-form',
   standalone: true,
@@ -63,49 +62,6 @@ import { TransactionService } from '../core/transaction.service';
       </div>
     </form>
   `,
-  styles: [
-    `
-      .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .row {
-        display: flex;
-        gap: 12px;
-      }
-      .row label {
-        flex: 1;
-      }
-      label {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-      }
-      input,
-      select,
-      button {
-        padding: 8px;
-        font-size: 15px;
-      }
-      .actions {
-        display: flex;
-        gap: 8px;
-      }
-      .error {
-        color: #c0392b;
-        margin: 0;
-      }
-      h3 {
-        margin: 0;
-      }
-    `,
-  ],
 })
 export class TransactionFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -152,7 +108,7 @@ export class TransactionFormComponent implements OnInit {
       note: v.note.trim() || null,
     };
 
-       this.saving.set(true);
+    this.saving.set(true);
     this.error.set('');
 
     const observer = {

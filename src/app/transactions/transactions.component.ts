@@ -88,22 +88,6 @@ import { TransactionFormComponent } from './transaction-form.component';
       </div>
     </div>
   `,
-  styles: [`
-    .page { max-width: 900px; margin: 30px auto; padding: 0 16px; }
-    .top { display: flex; justify-content: space-between; align-items: center; }
-    .filters { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin: 16px 0; }
-    .filters label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
-    input, select, button { padding: 7px; font-size: 14px; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eee; }
-    .num { text-align: right; }
-    .income { color: #1e8e3e; }
-    .expense { color: #c0392b; }
-    .actions { display: flex; gap: 6px; justify-content: flex-end; }
-    .empty { text-align: center; color: #777; }
-    .paging { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; }
-    .error { color: #c0392b; }
-  `],
 })
 export class TransactionsComponent implements OnInit {
   private fb = inject(FormBuilder);

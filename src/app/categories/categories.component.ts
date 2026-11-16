@@ -9,7 +9,7 @@ import { Category } from '../core/models';
   standalone: true,
   imports: [ReactiveFormsModule, HeaderComponent],
   template: `
-    <div class="page">
+    <div class="page narrow">
       <app-header />
       <h2>Categories</h2>
 
@@ -38,7 +38,7 @@ import { Category } from '../core/models';
             } @else {
               <span class="name">{{ c.name }}</span>
               <button (click)="editingId.set(c.id)">Rename</button>
-              <button (click)="remove(c)">Delete</button>
+              <button class="danger" (click)="remove(c)">Delete</button>
             }
           </li>
         } @empty {
@@ -47,48 +47,6 @@ import { Category } from '../core/models';
       </ul>
     </div>
   `,
-  styles: [
-    `
-      .page {
-        max-width: 600px;
-        margin: 30px auto;
-        padding: 0 16px;
-      }
-      .add {
-        display: flex;
-        gap: 8px;
-        margin: 16px 0;
-      }
-      .add input {
-        flex: 1;
-      }
-      input,
-      button {
-        padding: 8px;
-        font-size: 14px;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-      li {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        padding: 8px 0;
-        border-bottom: 1px solid #eee;
-      }
-      .name {
-        flex: 1;
-      }
-      .empty {
-        color: #777;
-      }
-      .error {
-        color: #c0392b;
-      }
-    `,
-  ],
 })
 export class CategoriesComponent implements OnInit {
   private fb = inject(FormBuilder);
