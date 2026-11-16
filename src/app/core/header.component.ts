@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
         <strong>Expense Tracker</strong>
         <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
         <a routerLink="/transactions" routerLinkActive="active">Transactions</a>
+        <a routerLink="/categories" routerLinkActive="active">Categories</a>
       </nav>
       <div>
         <span>{{ auth.email() }}</span>
