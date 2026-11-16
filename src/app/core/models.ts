@@ -43,3 +43,18 @@ export interface TransactionFilter {
   categoryId?: number | null;
   type?: string;
 }
+export interface CategorySpend {
+  categoryId: number;
+  categoryName: string;
+  total: number;
+  percent: number;
+}
+
+export interface Summary {
+  month: number;
+  year: number;
+  totalIncome: number;
+  totalExpense: number;
+  balance: number;
+  byCategory: CategorySpend[];
+}
